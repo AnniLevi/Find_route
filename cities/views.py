@@ -13,7 +13,7 @@ __all__ = (
     'CityCreateView',
     'CityUpdateView',
     'CityDeleteView',
-    'ContactListView',
+    'CityListView',
 )
 
 
@@ -68,8 +68,8 @@ class CityDeleteView(DeleteView):
         return self.post(request, *args, **kwargs)
 
 
-class ContactListView(ListView):
-    paginate_by = 2
+class CityListView(ListView):
+    paginate_by = 3
     model = City
     template_name = 'cities/home.html'
 
