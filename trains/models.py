@@ -8,7 +8,7 @@ class Train(models.Model):
     class Meta:
         verbose_name = 'Поезд'
         verbose_name_plural = 'Поезда'
-        ordering = ('-name',)
+        ordering = ('name',)
 
     name = models.CharField(max_length=50, unique=True, verbose_name='Название поезда')
     travel_time = models.PositiveSmallIntegerField(verbose_name='Время в пути')
@@ -26,7 +26,7 @@ class Train(models.Model):
     )
 
     def __str__(self):
-        return f'Поезд № {self.name} из города {self.from_city} в город {self.to_city}'
+        return f'Поезд {self.name} из города {self.from_city} в город {self.to_city}'
 
     def clean(self):
         if self.from_city == self.to_city:

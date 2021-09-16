@@ -29,7 +29,7 @@ class TrainForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     to_city = forms.ModelChoiceField(
-        label='Откуда',
+        label='Куда',
         queryset=City.objects,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
