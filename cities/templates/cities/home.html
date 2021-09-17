@@ -12,16 +12,22 @@
                     <td>
                         <a href="{% url 'cities:detail' pk=object.pk %}">{{ object.name }}</a>
                     </td>
-                    <td>
-                        <a href="{% url 'cities:update' pk=object.pk %}">
-                        <button type="submit" class="btn btn-primary">Редактировать</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'cities:delete' pk=object.pk %}">
-                        <button type="submit" class="btn btn-danger">Удалить</button>
-                        </a>
-                    </td>
+                    {% if user.is_authenticated %}
+                        <td>
+                            <a href="{% url 'cities:update' pk=object.pk %}">
+                            <button type="submit" class="btn btn-primary">Редактировать</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'cities:delete' pk=object.pk %}">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                            </a>
+                        </td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    {% endif %}
+
                 </tr>
             {% endfor %}
         </table>
@@ -51,18 +57,20 @@
             {% endif %}
         </li>
     </ul>
+
 </nav>
 
+{% if user.is_authenticated %}
 <div class="row">
     <div class="col-md-4">
         <form action="{% url 'cities:create' %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Submit">
+            <input type="submit" value="Сохранить">
         </form>
     </div>
 </div>
-
+{% endif %}
 {% endblock %}
 
 

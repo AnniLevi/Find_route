@@ -5,7 +5,7 @@ Site for finding a route between specified cities.
 Representation of cities in the form of vertices of a directed graph. 
 Search for routes between the vertices of the graph by traversing the graph in depth (Depth-first search).
 
-Used Python (Django), HTML, CSS, Bootstrap
+Used Python (Django), HTML, Bootstrap
 ____
 
 #### Cities
@@ -32,5 +32,6 @@ A separate page with routes view has been implemented.
 The route can only be saved, viewed and deleted. The user cannot edit the saved route.
 
 Only registered users have access to adding / editing trains / cities, as well as deleting any records.
+Registration and authorization of users has been implemented.
 
 The code is covered in tests.

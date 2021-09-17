@@ -4,6 +4,8 @@
 {% url 'trains:create' as trains_create_url %}
 {% url 'about' as about_url %}
 {% url 'list' as list_url %}
+{% url 'accounts:login' as login_url %}
+{% url 'accounts:registration' as register_url %}
 
 <!doctype html>
 <html lang="en">
@@ -48,49 +50,70 @@
                             <a class="nav-link {% if request.path == about_url %} active {% endif %}"
                                href="{% url 'about' %}">Описание</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle
-                                {% if request.path == cities_create_url or request.path == trains_create_url %} active {% endif %}"
-                                href="#" id="navbarDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Добавить
-                            </a>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle
+                                    {% if request.path == cities_create_url or request.path == trains_create_url %} active {% endif %}"
+                                    href="#" id="navbarDropdownMenuLink" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Добавить
+                                </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item {% if request.path == cities_create_url %} active {% endif %}"
                                        href="{% url 'cities:create' %}">Город</a></li>
                                 <li><a class="dropdown-item {% if request.path == trains_create_url %} active {% endif %}"
                                        href="{% url 'trains:create' %}">Поезд</a></li>
                             </ul>
-                        </li>
-                       </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                            <a class="nav-link disabled" href="">Добавить</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link {% if request.path == login_url %} active {% endif %}"
+                               href="{% url 'accounts:login' %}">Войти</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link {% if request.path == register_url %} active {% endif %}"
+                               href="{% url 'accounts:registration' %}">Регистрация</a>
+                            </li>
+                        {% endif %}
+                   </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mx-auto my-4">
-                    {% if messages %}
-                            {% for message in messages %}
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        {{ message }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                {% else %}
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ message }}
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto my-4">
+            {% if messages %}
+              {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                      {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-success  alert-dismissible fade show" role="alert">
+                      {{ message }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
         </div>
-
+      </div>
+      <div class="container">
         {% block content %}{% endblock %}
-        </div>
+      </div>
         <!-- Optional JavaScript; choose one of the two! -->
 
         <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -108,5 +131,6 @@
             $('.js-example-basic-multiple').select2();
         });
     </script>
+    </div>
     </body>
 </html>

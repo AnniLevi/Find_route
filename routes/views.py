@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
-
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
 from routes.models import Route
 from routes.utils import get_routes
 from trains.models import Train
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def home(request):
@@ -31,6 +33,7 @@ def find_routes(request):
         return render(request, 'routes/home.html', {'form': form})
 
 
+# @login_required
 def add_route(request):
     if request.method == 'POST':
         context = {}
@@ -80,3 +83,12 @@ class RouteListView(ListView):
 class RouteDetailView(DetailView):
     queryset = Route.objects
     template_name = 'routes/detail.html'
+
+
+class RouteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Route
+    success_url = reverse_lazy('home')
+
+    def get(self, request, *args, **kwargs):
+        messages.success(request, 'Маршрут успешно удален')
+        return self.post(request, *args, **kwargs)

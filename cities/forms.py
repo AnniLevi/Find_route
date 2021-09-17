@@ -13,7 +13,7 @@ class CityForm(forms.ModelForm):
         fields = ('name',)
 
     name = forms.CharField(
-        label='Город',
+        label='Добавить город',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'Введите название города'
