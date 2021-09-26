@@ -193,3 +193,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # python manage.py dumpdata cities routes trains > mydata.json
 # python manage.py dumpdata --indent 4 cities routes trains > mydata.json
 # файл с данными - фикстура
+
+# обратная команда (на сервере):
+# python manage.py loaddata mydata.json
+
+
+# tests:
+# pip install coverage
+# coverage run manage.py test
+# coverage report - in console
+# coverage html - in html (htmlcov/index.html)

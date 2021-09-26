@@ -3,3 +3,5 @@
 *.sqlite3
 *.log
 settings_local.py
+htmlcov/
+/.coverage
