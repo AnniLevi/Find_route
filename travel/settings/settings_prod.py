@@ -35,7 +35,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent      # .parent доба
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['find-route-py.herokuapp.com']
 
 
 # Application definition
@@ -146,42 +146,50 @@ STATIC_ROOT = BASE_DIR.joinpath('staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        }
-    },
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {message}',
-            'style': '{',
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-        },
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR.joinpath('log/application.log'),
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'django.db.backends': {
-            'level': 'DEBUG',
-            'handlers': ['file']
-        }
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'require_debug_true': {
+#             '()': 'django.utils.log.RequireDebugTrue',
+#         }
+#     },
+#     'formatters': {
+#         'verbose': {
+#             'format': '{levelname} {asctime} {module} {message}',
+#             'style': '{',
+#         }
+#     },
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'filters': ['require_debug_true'],
+#             'class': 'logging.StreamHandler',
+#         },
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': BASE_DIR.joinpath('log/application.log'),
+#             'formatter': 'verbose'
+#         }
+#     },
+#     'loggers': {
+#         'django.request': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': False,
+#         },
+#         'django.db.backends': {
+#             'level': 'DEBUG',
+#             'handlers': ['file']
+#         }
+#     }
+# }
+# убрать для деплоя на heroku
+
+
+
+# dump data commands:
+# python manage.py dumpdata cities routes trains > mydata.json
+# python manage.py dumpdata --indent 4 cities routes trains > mydata.json
+# файл с данными - фикстура
