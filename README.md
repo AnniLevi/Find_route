@@ -5,7 +5,8 @@ Site for finding a route between specified cities.
 Representation of cities in the form of vertices of a directed graph. 
 Search for routes between the vertices of the graph by traversing the graph in depth (Depth-first search).
 
-Used Python (Django), HTML, Bootstrap
+Used Python (Django), HTML, CSS, Bootstrap.
+Deployed on Heroku.
 ____
 
 #### Cities
